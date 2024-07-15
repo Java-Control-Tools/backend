@@ -16,6 +16,7 @@ import java.net.Socket;
  * @author at0m1cc
  * @version 1.0
  * */
+@Deprecated
 @Controller
 public class ControlController {
     /**
