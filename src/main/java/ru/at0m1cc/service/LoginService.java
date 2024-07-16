@@ -15,11 +15,6 @@ public class LoginService {
     }
 
     public boolean login(String password){
-        if(password.equals(loginRepository.getPassword())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return password.equals(loginRepository.getPassword());
     }
 }

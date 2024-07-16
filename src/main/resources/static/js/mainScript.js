@@ -29,7 +29,7 @@ function rebootServer(){
 }
 function changePassword(){
 	let newPassword = prompt("Enter a new password");
-	if(newPassword != "" && newPassword != null){
+	if(newPassword !== "" && newPassword != null){
 		let confirmNewPassword = prompt("Confirm your new password");
 		if(newPassword === confirmNewPassword){
 			alert("Password changed");
@@ -50,4 +50,18 @@ function login(){
 					}
                 }
 	});
+}
+function logout(){
+	let choose = confirm("You are sure?");
+	if(choose){
+		$(".inputPass").val("");
+		$.ajax({
+			url: "http://localhost:8080/api/login/logout",
+			method: "post",
+			success: function (){
+				$("#loginForm").show();
+				$("#mainForm").hide();
+			}
+		});
+	}
 }
