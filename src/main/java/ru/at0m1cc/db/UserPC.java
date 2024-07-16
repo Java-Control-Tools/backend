@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "USER_PC")
 public class UserPC {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private long id;
     @Column(name = "IP_ADDRESS")
