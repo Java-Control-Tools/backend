@@ -37,7 +37,6 @@ public class LoginController {
         if(session.getAttribute("login") == null) {
             if(loginService.login(password)) {
                 session.setAttribute("login", "OK");
-                userPCRepository.save(new UserPC("1","1","1"));
                 return "{\"status\":\"OK\"}";
             }
             else {

@@ -2621,3 +2621,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/at0m1cc/Р
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 54 more
+2024-07-18 22:11:21.872767+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PASSWORD PASSWORD [*]USER_PC"
+Syntax error in SQL statement "SELECT * FROM PASSWORD PASSWORD [*]USER_PC"; SQL statement:
+SELECT * FROM PASSWORD PASSWORD USER_PC [42000-224]
