@@ -19,14 +19,12 @@ public class LoginController {
      * Сервис с логикой проверки пароля
      * */
     private final LoginService loginService;
-    private final UserPCRepository userPCRepository;
     /**
      * Конструктор с аннотацией Autowired для автоматического внедрения зависимостей
      * */
     @Autowired
     public LoginController(LoginService loginService, UserPCRepository userPCRepository) {
         this.loginService = loginService;
-        this.userPCRepository = userPCRepository;
     }
     /**
      * API для проверки атрибута сессии, в случае когда атрибута сессии нет, выполняется проверка пароля
