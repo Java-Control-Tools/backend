@@ -19,5 +19,5 @@ public interface PasswordRepository extends JpaRepository<Password, Long> {
      * Объявление сигнатуры метода findByPassword, который в дальнейшем по средствам spring будет выполнять запрос на
      * Поиск аргумента Password по столбцу Password
      * */
-    List<Password> findByPassword(String password);
+    Password findByPassword(String password);
 }

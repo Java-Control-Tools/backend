@@ -53,4 +53,19 @@ public class LoginController {
     public void logout(HttpSession session) {
         session.removeAttribute("login");
     }
+
+    @PostMapping("/changePassword")
+    @CrossOrigin("*")
+    public String changePassword(@RequestParam("newPassword") String newPassword,@RequestParam("password") String password, HttpSession session) {
+        if(session.getAttribute("login") == null) {//!!!
+            if(loginService.login(password)) {
+                loginService.changePassword(password, newPassword);
+                return "{\"status\":\"OK\"}";
+            }
+            else {
+                return "{\"status\":\"ERROR\"}";
+            }
+        }
+        return null;
+    }
 }

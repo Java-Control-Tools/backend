@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.at0m1cc.db.Password;
 import ru.at0m1cc.repository.PasswordRepository;
 
-import java.util.List;
-
 /**
  * Сервис для работы с данными из репозитория
  * @author at0m1cc
@@ -42,7 +40,12 @@ public class LoginService {
      * Метод проверки пароля
      * */
     public boolean login(String password) {
-        List<Password> passwords = passwordRepository.findByPassword(password);
-        return !passwords.isEmpty();
+        Password passwords = passwordRepository.findByPassword(password);
+        return passwords != null;
+    }
+    public void changePassword(String OldPassword, String newPassword) {
+        Password password = passwordRepository.findByPassword(OldPassword);
+        password.setPassword(newPassword);
+        passwordRepository.save(password);
     }
 }
