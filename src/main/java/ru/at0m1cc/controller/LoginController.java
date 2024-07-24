@@ -2,8 +2,10 @@ package ru.at0m1cc.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.at0m1cc.db.UserPC;
+import ru.at0m1cc.dto.StatusCode;
+import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.repository.UserPCRepository;
 import ru.at0m1cc.service.LoginService;
 
@@ -31,19 +33,17 @@ public class LoginController {
      * */
     @CrossOrigin(origins = "*")
     @PostMapping("/check")
-    public String login(@RequestParam("password") String password, HttpSession session) {
+    public ResponseEntity<StatusDTO> login(@RequestParam("password") String password, HttpSession session) {
         if(session.getAttribute("login") == null) {
             if(loginService.login(password)) {
                 session.setAttribute("login", "OK");
-                return "{\"status\":\"OK\"}";
+                return ResponseEntity.ok(new StatusDTO(StatusCode.OK));
             }
             else {
-                return "{\"status\":\"ERROR\"}";
+                return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
             }
         }
-        else {
-            return "{\"status\":\"OK\"}";
-        }
+        return ResponseEntity.ok(new StatusDTO(StatusCode.OK));
     }
     /**
      * API для выхода из системы
@@ -56,16 +56,13 @@ public class LoginController {
 
     @PostMapping("/changePassword")
     @CrossOrigin("*")
-    public String changePassword(@RequestParam("newPassword") String newPassword,@RequestParam("password") String password, HttpSession session) {
-        if(session.getAttribute("login") == null) {//!!!
+    public ResponseEntity<StatusDTO> changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("password") String password, HttpSession session) {
+        if(session.getAttribute("login") == null) {//!!! ФИКСИТЬ!!!
             if(loginService.login(password)) {
                 loginService.changePassword(password, newPassword);
-                return "{\"status\":\"OK\"}";
-            }
-            else {
-                return "{\"status\":\"ERROR\"}";
+                return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
             }
         }
-        return null;
+        return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR));
     }
 }

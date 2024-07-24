@@ -2,6 +2,7 @@ header {
   background: #2d4ea5;
   display: flex;
   text-align: center;
+  height: 105px;
 }
 .loginDiv{
   margin: 108px;
@@ -83,6 +84,7 @@ td {
   border-style: solid;
   border-color: #2d4ea5;
   color: #2d4ea5;
+  font-size: 18px;
 }
 .buttonTable {
   color: #0d47a1;
@@ -90,7 +92,7 @@ td {
   cursor: pointer;
   transition: 0.5s;
   border: 0;
-  font-size: 16px;
+  font-size: 18px;
   width: 100%;
 }
 .buttonTable:hover{
@@ -113,10 +115,10 @@ input:focus{
   color: #fff;
 }
 #loginForm{
-  display: block;
+  display: none;
 }
 #mainForm{
-  display: none;
+  display: block;
 }
 #controlShow{
   display: none;
@@ -173,4 +175,13 @@ input:focus{
 }
 .settingsButton:hover{
   background: #5890c4;
+}
+@media (max-width: 380px){
+  header{
+    height: 65px;
+  }
+  .headerP{
+    font-size: 25px;
+    margin: 13px;
+  }
 }
