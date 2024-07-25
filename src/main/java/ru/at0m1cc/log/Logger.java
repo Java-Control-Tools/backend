@@ -2,9 +2,11 @@ package ru.at0m1cc.log;
 
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
 
 @Component
 public class Logger {
@@ -46,6 +48,16 @@ public class Logger {
             throw new RuntimeException(e);
         }
     }
-
+    public List<String> showLog() throws FileNotFoundException {
+        FileReader logShow = new FileReader("log.log");
+        Scanner logShowScanner = new Scanner(logShow);
+        List<String> logLines = new ArrayList<>();
+        for(;logShowScanner.hasNextLine();){
+            String line = logShowScanner.nextLine();
+            logLines.add(line);
+        }
+        logShowScanner.close();
+        return logLines;
+    }
 
 }

@@ -6,6 +6,7 @@ import ru.at0m1cc.log.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ServerSettingsService {
@@ -16,6 +17,9 @@ public class ServerSettingsService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public List<String> showLogs() throws IOException {
+        return new Logger().showLog();
     }
 
 
