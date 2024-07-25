@@ -2,8 +2,11 @@ package ru.at0m1cc.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.at0m1cc.db.UserPC;
+import ru.at0m1cc.dto.StatusCode;
+import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.service.JavaControlService;
 
 import java.util.List;
@@ -30,10 +33,10 @@ public class JavaControlController {
     /**
      * API для отображения пользователей
      * */
-    @GetMapping("/showUsers")
+    @GetMapping("/showUsersPC")
     @CrossOrigin("*")
     public List<UserPC> showUsers(HttpSession session) {
-        if(session.getAttribute("login") == null) {//!!!!!!!!!!!
+        if(session.getAttribute("login") != null) {
             return javaControlService.showUsers();
         }
         return null;
@@ -41,50 +44,35 @@ public class JavaControlController {
     /**
      * API для обработки команд
      * */
-    @PostMapping("/controlUser")
+    @PostMapping("/controlUserPC")
     @CrossOrigin("*")
-    public String control(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port, @RequestParam("command") String command) {
-        if(session.getAttribute("login") == null) { //!!!!!!
-            if(javaControlService.sendCommandToUserPC(ipAddress, port, command)) {
-                return "{\"status\":\"OK\"}";
-            }
-            else {
-                return "{\"status\":\"ERROR\"}";
-            }
+    public ResponseEntity<StatusDTO> control(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port, @RequestParam("command") String command) {
+        if(session.getAttribute("login") != null) {
+            return  javaControlService.sendCommandToUserPC(ipAddress, port, command);
         }
-        return null;
+        return ResponseEntity.status(401).build();
     }
     /**
      * API для добавления ПК пользователя в бд
-     * */
+     */
     @PostMapping("/addUserPC")
     @CrossOrigin("*")
-    public String addUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
+    public ResponseEntity<StatusDTO> addUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
         if(port.isEmpty()){
             port = "5556";
         }
-        if(session.getAttribute("login") == null) {//!!!!!!
-            if(javaControlService.addUser(ipAddress, port)) {
-                return "{\"status\":\"OK\"}";
-            }
-            else {
-                return "{\"status\":\"ERROR\"}";
-            }
+        if(session.getAttribute("login") != null) {
+           return javaControlService.addUser(ipAddress, port);
         }
-        return null;
+        return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
     }
 
-    @PostMapping("/deleteUser")
+    @PostMapping("/deleteUserPC")
     @CrossOrigin("*")
-    public String deleteUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
-        if(session.getAttribute("login") == null) {//!!!!
-            if(javaControlService.deleteUser(ipAddress, port)) {
-                return "{\"status\":\"OK\"}";
-            }
-            else {
-                return "{\"status\":\"ERROR\"}";
-            }
+    public ResponseEntity<StatusDTO> deleteUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
+        if(session.getAttribute("login") != null) {
+            return javaControlService.deleteUser(ipAddress, port);
         }
-        return null;
+        return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
     }
 }

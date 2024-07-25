@@ -6155,3 +6155,56 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-07-23 13:03:34.365843+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:03:36.053847+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:03:40.045755+05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'&lt;!--#exec cmd=\\""/bin/echo ''&lt;SCR''\\""--&gt;&lt;!--#exec cmd=\\""/bin/echo ''... (154)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:16:03.025597+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:16:05.503853+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:16:07.561067+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:16:08.832410+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 13:16:16.697881+05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"
+Value too long for column "IP_ADDRESS CHARACTER VARYING(50)": "'0\\""autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>""-confirm(3)-""' (77)"; SQL statement:
+insert into user_pc (ip_address,port,status,id) values (?,?,?,default) [22001-224]
+2024-07-23 08:20:58 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:469)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
