@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.at0m1cc.db.Password;
 import ru.at0m1cc.repository.PasswordRepository;
 
+import java.io.IOException;
+
 /**
  * Сервис для работы с данными из репозитория
  * @author at0m1cc
@@ -29,7 +31,7 @@ public class LoginService {
      * Какие-либо записи, в случае отсутствия мы добавляем пароль по умолчанию
      * */
     @PostConstruct
-    public void postConstruct() {
+    public void postConstruct() throws IOException {
         if(passwordRepository.count() == 0) {
             Password password = new Password();
             password.setPassword("password");
@@ -47,5 +49,6 @@ public class LoginService {
         Password password = passwordRepository.findByPassword(OldPassword);
         password.setPassword(newPassword);
         passwordRepository.save(password);
+
     }
 }

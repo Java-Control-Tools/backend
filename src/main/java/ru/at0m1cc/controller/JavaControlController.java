@@ -36,7 +36,7 @@ public class JavaControlController {
     @GetMapping("/showUsersPC")
     @CrossOrigin("*")
     public List<UserPC> showUsers(HttpSession session) {
-        if(session.getAttribute("login") == null) {//!!!!!!!!!!!
+        if(session.getAttribute("login") != null) {
             return javaControlService.showUsers();
         }
         return null;
@@ -47,7 +47,7 @@ public class JavaControlController {
     @PostMapping("/controlUserPC")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> control(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port, @RequestParam("command") String command) {
-        if(session.getAttribute("login") == null) { //!!!!!!
+        if(session.getAttribute("login") != null) {
             return  javaControlService.sendCommandToUserPC(ipAddress, port, command);
         }
         return ResponseEntity.status(401).build();
@@ -61,7 +61,7 @@ public class JavaControlController {
         if(port.isEmpty()){
             port = "5556";
         }
-        if(session.getAttribute("login") == null) {//!!!!!! ФИКСИТЬ!
+        if(session.getAttribute("login") != null) {
            return javaControlService.addUser(ipAddress, port);
         }
         return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
@@ -70,7 +70,7 @@ public class JavaControlController {
     @PostMapping("/deleteUserPC")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> deleteUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
-        if(session.getAttribute("login") == null) {//!!!! ФИКСИТЬ!
+        if(session.getAttribute("login") != null) {
             return javaControlService.deleteUser(ipAddress, port);
         }
         return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
