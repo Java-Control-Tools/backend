@@ -1,6 +1,5 @@
 package ru.at0m1cc.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +9,6 @@ import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.log.Logger;
 import ru.at0m1cc.repository.UserPCRepository;
 import ru.at0m1cc.service.LoginService;
-
-import java.util.Date;
 
 /**
  *  API для работы с авторизацией
@@ -61,7 +58,9 @@ public class LoginController {
     public void logout(HttpSession session) {
         session.removeAttribute("login");
     }
-
+    /**
+     * API для смены пароля
+     * */
     @PostMapping("/changePassword")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> changePassword(@RequestHeader(value = "User-Agent") String userAgent,@RequestParam("newPassword") String newPassword, @RequestParam("password") String password, HttpSession session) {

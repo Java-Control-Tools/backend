@@ -58,7 +58,7 @@ public class JavaControlController {
     @PostMapping("/addUserPC")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> addUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
-        if(port.isEmpty()){
+        if(port.isEmpty()){ //Если порт пустой, то ставим по дефолту
             port = "5556";
         }
         if(session.getAttribute("login") != null) {
@@ -66,7 +66,9 @@ public class JavaControlController {
         }
         return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
     }
-
+    /**
+     * API для удаления ПК пользователя из бд
+     */
     @PostMapping("/deleteUserPC")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> deleteUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){

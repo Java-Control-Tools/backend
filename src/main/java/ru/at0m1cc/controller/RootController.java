@@ -1,11 +1,8 @@
 package ru.at0m1cc.controller;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.at0m1cc.log.Logger;
 
-import java.io.IOException;
 
 /**
  * Контроллер для возвращения index.html
