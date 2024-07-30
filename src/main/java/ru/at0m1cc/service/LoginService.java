@@ -45,6 +45,9 @@ public class LoginService {
         Password passwords = passwordRepository.findByPassword(password);
         return passwords != null;
     }
+    /**
+     * Метод смены пароля
+     * */
     public void changePassword(String OldPassword, String newPassword) {
         Password password = passwordRepository.findByPassword(OldPassword);
         password.setPassword(newPassword);

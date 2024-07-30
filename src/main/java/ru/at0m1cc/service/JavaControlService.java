@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class JavaControlService {
-    private final Socket socket;
     /**
      * Поле репозитория
      * */
@@ -26,7 +25,6 @@ public class JavaControlService {
     @Autowired
     public JavaControlService(UserPCRepository userPCRepository) {
         this.userPCRepository = userPCRepository;
-        socket = new Socket();
     }
     /**
      * Метод для проверки активности всех ПК
@@ -35,6 +33,7 @@ public class JavaControlService {
         List<UserPC> userPC = userPCRepository.findAll();
         for (UserPC user : userPC) {
             try {
+                Socket socket = new Socket();
                 socket.connect(new InetSocketAddress(user.getIpAddress(), Integer.parseInt(user.getPort())), 1000);
                 socket.getOutputStream().write("checkStatus".getBytes());
                 socket.getOutputStream().close();
@@ -75,7 +74,9 @@ public class JavaControlService {
         }
         return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR_ENTITY_ALREADY_EXISTS));
     }
-
+    /**
+     * Метод для удаления ПК пользователя
+     */
     public ResponseEntity<StatusDTO> deleteUser(String ipAddress, String port){
         if(userPCRepository.existsByIpAddressAndPort(ipAddress, port)){
             UserPC user = userPCRepository.findByIpAddressAndPort(ipAddress, port);
@@ -90,6 +91,7 @@ public class JavaControlService {
      */
     public ResponseEntity<StatusDTO> sendCommandToUserPC(String ipAddress, String port, String command){
         try{
+            Socket socket = new Socket();
             socket.connect(new InetSocketAddress(ipAddress, Integer.parseInt(port)), 1000);
             socket.getOutputStream().write(command.getBytes());
             socket.getOutputStream().flush();
