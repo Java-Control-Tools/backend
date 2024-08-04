@@ -85,8 +85,11 @@ public class JavaControlService {
         }
         return ResponseEntity.status(404).body(new StatusDTO(StatusCode.ERROR_ENTITY_ALREADY_EXISTS));
     }
+    /**
+     * Метод для обновления ПК пользователя
+     */
     public ResponseEntity<StatusDTO> updateUser(String oldIpAddress, String oldPort, String newIpAddress, String newPort){
-        if(userPCRepository.existsByIpAddressAndPort(oldIpAddress, oldPort)){
+        if(userPCRepository.existsByIpAddressAndPort(oldIpAddress, oldPort) && !userPCRepository.existsByIpAddressAndPort(newIpAddress, newPort)){
             UserPC user = userPCRepository.findByIpAddressAndPort(oldIpAddress, oldPort);
             user.setIpAddress(newIpAddress);
             user.setPort(newPort);

@@ -11,7 +11,6 @@
 	<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.bpopup.js"></script>
 	<script type="text/javascript" src="js/mainScript.js"></script>
-	<script type="text/javascript" src="js/loadingPage.js"></script>
 	<script type="text/javascript" src="js/showingContentBlocks.js"></script>
 	<script type="text/javascript" src="js/crudOperationsForUsers.js"></script>
 </head>
@@ -93,6 +92,13 @@
 								<p style="margin-left: 10px;margin-right: 10px;"><input id = "portUp"  type="text" name="port" placeholder="Port (default 5556)" maxlength="5" pattern="[0-9]*"></p>
 								<button id="scanButton" class="mainButton" style="margin-bottom: 10px;">Update</button>
 							</form>
+						</div>
+						<div id="successfulModal">
+							<p style="text-align: center">Successful!</p>
+							<div style="display: flex">
+								<img id="ico" src="images/successful.png">
+								<button id = "scanButton" class="mainButton" onclick="$('#successfulModal').bPopup().close()" style="margin-top: 50px; margin-left: 20px;">Okay</button>
+							</div>
 						</div>
 					</div>
 					<div id = "screenShow">

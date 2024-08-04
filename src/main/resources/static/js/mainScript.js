@@ -34,7 +34,7 @@ function changePassword(){
 					data: {newPassword: newPasswordSend, password: oldPassword},
 					success: function(data){
 						if(data.status === "OK"){
-							alert("Success!");
+							alert("Successful!");
 							jcShow();
 						}
 					},
@@ -58,7 +58,7 @@ function login(){
 						$("#loginForm").hide();
 						$("#mainForm").show();
 					}
-                }
+		}
 	});
 }
 function logout(){
@@ -103,7 +103,7 @@ function sendCommandToUserPC(comm) {
 					data: { ipAddress : ipGlobal, port: portGlobal, command: comm},
 					success: function(data) {
 						if(data.status === "OK"){
-							alert("Success!");
+							alert("Successful!");
 							jcShow();
 						}
 					},
@@ -134,4 +134,8 @@ function showLogs(){ //Вывод логов
 			})
 		}
 	});
+}
+function showSuccessfulModal(){
+	$("#successfulModal").bPopup();
+	$("#updateDiv").bPopup().close();
 }
