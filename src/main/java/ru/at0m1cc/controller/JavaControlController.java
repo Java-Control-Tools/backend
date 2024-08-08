@@ -9,12 +9,6 @@ import ru.at0m1cc.dto.StatusCode;
 import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.service.JavaControlService;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.font.ImageGraphicAttribute;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -83,7 +77,9 @@ public class JavaControlController {
         }
         return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
     }
-
+    /**
+     * API для обновления ПК пользователя в бд
+     */
     @PostMapping("/updateUserPC")
     @CrossOrigin("*")
     public ResponseEntity<StatusDTO> updateUser(HttpSession session, @RequestParam("oldIp") String oldIpAddress, @RequestParam("oldPort") String oldPort,

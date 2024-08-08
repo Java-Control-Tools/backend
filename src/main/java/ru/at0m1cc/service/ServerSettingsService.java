@@ -5,8 +5,6 @@ import ru.at0m1cc.log.Logger;
 
 import java.io.IOException;
 import java.util.List;
-
-
 /**
  * Сервис для работы с сервером
  * @author at0m1cc

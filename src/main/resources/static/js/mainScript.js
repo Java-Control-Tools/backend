@@ -1,8 +1,34 @@
-let ipGlobal; //Похуй + похуй потом исправлю 
+let ipGlobal;
 let portGlobal;
 let statusGlobal;
 const API_URL = "http://localhost:8080/";
 
+$(function (){
+	$("#changePassDiv").submit(function(e){
+		if($("#newPassword").val() === $("#confirmPassword").val()){
+			$.ajax({
+				url: API_URL + "api/login/changePassword",
+				method: "post",
+				dataType: "json",
+				data: {newPassword: $("#newPassword").val(), password: $("#oldPassword").val()},
+				success: function(data){
+					if(data.status === "OK"){
+						alert("Successful!");
+						$("#changePassDiv").bPopup().close();
+						$("input").val("");
+					}
+				},
+				error: function(data){
+					errorStatus(data.responseJSON.status)
+				}
+			});
+		}
+		else {
+			alert("The entered passwords do not match!");
+		}
+		e.preventDefault();
+	});
+});
 function errorStatus(status){
 	if(status === "ERROR_ENTITY_ALREADY_EXISTS"){
 		alert("Error! Entity already exists!");
@@ -21,30 +47,7 @@ function rebootServer(){
 	}
 }
 function changePassword(){
-	let oldPassword = prompt("Enter password");
-	if (oldPassword !== "" && oldPassword != null){
-		let newPasswordSend = prompt("Enter a new password");
-		if(newPasswordSend !== "" && newPasswordSend != null){
-			let confirmNewPassword = prompt("Confirm your new password");
-			if(newPasswordSend === confirmNewPassword){
-				$.ajax({
-					url: API_URL + "api/login/changePassword",
-					method: "post",
-					dataType: "json",
-					data: {newPassword: newPasswordSend, password: oldPassword},
-					success: function(data){
-						if(data.status === "OK"){
-							alert("Successful!");
-							jcShow();
-						}
-					},
-					error: function (data) {
-						errorStatus(data.responseJSON.status);
-					}
-				});
-			}
-		}
-	}
+	$("#changePassDiv").bPopup();
 }
 function login(){
 	let passwordSend = $(".inputPass").val();
@@ -86,6 +89,7 @@ function sendCommandToUserPC(comm) {
 				success: function(data) {
 					$("#control").hide();
 					$("#screenShow").empty().show().append("<img src= " + API_URL + "files/photo?id="+ Math.random() +"  alt=''/>");
+					$("#updateScreen").show();
 				},
 				error: function (data){
 					errorStatus(data.responseJSON.status);
@@ -134,8 +138,4 @@ function showLogs(){ //Вывод логов
 			})
 		}
 	});
-}
-function showSuccessfulModal(){
-	$("#successfulModal").bPopup();
-	$("#updateDiv").bPopup().close();
 }

@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-
+/**
+ *  API для получения файла изображения с рабочего стола ПК
+ * @author at0m1cc
+ * @version 1.1
+ * */
 @RestController
 @RequestMapping("/files")
 public class FilesController {

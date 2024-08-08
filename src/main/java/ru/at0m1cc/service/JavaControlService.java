@@ -30,8 +30,8 @@ public class JavaControlService {
      * Метод для проверки активности всех ПК
      * */
     public void checkActiveUsers(){
-        List<UserPC> userPC = userPCRepository.findAll();
-        for (UserPC user : userPC) {
+        List<UserPC> userPC = userPCRepository.findAll(); //Поиск всех ПК в БД
+        for (UserPC user : userPC) { // С помощью цикла идет проверка каждого ПК на активность
             try {
                 Socket socket = new Socket();
                 socket.connect(new InetSocketAddress(user.getIpAddress(), Integer.parseInt(user.getPort())), 200);
@@ -53,13 +53,13 @@ public class JavaControlService {
      * */
     public List<UserPC> showUsers(){
         checkActiveUsers();
-        return userPCRepository.findAll();
+        return userPCRepository.findAll(); // Поиск всех ПК в БД и отправка в формате листа на view
     }
     /**
      * Добавление ПК пользователя, предварительно проверив есть ли уже такой ПК в таблице
      * */
     public ResponseEntity<StatusDTO> addUser(String ipAddress, String port){
-        if(!userPCRepository.existsByIpAddressAndPort(ipAddress, port)){
+        if(!userPCRepository.existsByIpAddressAndPort(ipAddress, port)){ // Проверка на то, нет ли такой же записи в бд
             try{
                 UserPC user = new UserPC();
                 user.setIpAddress(ipAddress);
@@ -69,7 +69,7 @@ public class JavaControlService {
                 return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
             }
             catch (Exception e){
-                return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR));
+                return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR)); // Если что-либо пошло не так
             }
         }
         return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR_ENTITY_ALREADY_EXISTS));
@@ -78,7 +78,7 @@ public class JavaControlService {
      * Метод для удаления ПК пользователя
      */
     public ResponseEntity<StatusDTO> deleteUser(String ipAddress, String port){
-        if(userPCRepository.existsByIpAddressAndPort(ipAddress, port)){
+        if(userPCRepository.existsByIpAddressAndPort(ipAddress, port)){ // Проверка на то есть ли такая запись вообще
             UserPC user = userPCRepository.findByIpAddressAndPort(ipAddress, port);
             userPCRepository.delete(user);
             return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
@@ -90,6 +90,8 @@ public class JavaControlService {
      */
     public ResponseEntity<StatusDTO> updateUser(String oldIpAddress, String oldPort, String newIpAddress, String newPort){
         if(userPCRepository.existsByIpAddressAndPort(oldIpAddress, oldPort) && !userPCRepository.existsByIpAddressAndPort(newIpAddress, newPort)){
+            // Тут проверка на то есть ли запись по старым данным и одновременно проверка нет ли такой же записи по новым данным
+            // Сделано, для того чтобы избежать повторения записей
             UserPC user = userPCRepository.findByIpAddressAndPort(oldIpAddress, oldPort);
             user.setIpAddress(newIpAddress);
             user.setPort(newPort);
@@ -104,13 +106,13 @@ public class JavaControlService {
      */
     public ResponseEntity<StatusDTO> sendCommandToUserPC(String ipAddress, String port, String command){
         try{
-            if(command.equals("screen")){
+            if(command.equals("screen")){ //Если команда скриншота, то мы перенаправляем в отдельный метод для скриншотинга
                 try {
                     sendCommandScreen(ipAddress, port);
                     return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
                 }
                 catch (IOException e){
-                    return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR));
+                    return ResponseEntity.badRequest().body(new StatusDTO(StatusCode.ERROR)); //Если что-либо пошло не по плану
                 }
 
             }
@@ -122,10 +124,12 @@ public class JavaControlService {
             socket.close();
             return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
         } catch (IOException e) {
-            return ResponseEntity.status(503).body(new StatusDTO(StatusCode.ERROR));
+            return ResponseEntity.status(503).body(new StatusDTO(StatusCode.ERROR)); // Если что-либо пошло не так
         }
     }
-
+    /**
+     * Метод для отправки команды screen и получения файла изображения
+     */
     public void sendCommandScreen(String ipAddress, String port) throws IOException {
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress(ipAddress, Integer.parseInt(port)), 200);
@@ -133,10 +137,10 @@ public class JavaControlService {
         BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
         bos.write("screen\n".getBytes());
         bos.flush();
-        FileOutputStream fos = new FileOutputStream("screen.png", false);
+        FileOutputStream fos = new FileOutputStream("screen.png", false); // Создаём пустышку
         byte[] byteArray = new byte[8192];
         int bytesRead;
-        while ((bytesRead = bis.read(byteArray)) != -1) {
+        while ((bytesRead = bis.read(byteArray)) != -1) { //Читаем и записываем в файл байты
             fos.write(byteArray, 0, bytesRead);
         }
         bis.close();
