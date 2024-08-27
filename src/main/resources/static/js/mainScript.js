@@ -7,7 +7,7 @@ $(function (){
 	$("#changePassDiv").submit(function(e){
 		if($("#newPassword").val() === $("#confirmPassword").val()){
 			$.ajax({
-				url: API_URL + "api/login/changePassword",
+				url: API_URL + "changePassword",
 				method: "post",
 				dataType: "json",
 				data: {newPassword: $("#newPassword").val(), password: $("#oldPassword").val()},
@@ -48,35 +48,6 @@ function rebootServer(){
 }
 function changePassword(){
 	$("#changePassDiv").bPopup();
-}
-function login(){
-	let passwordSend = $(".inputPass").val();
-	$.ajax({
-		url:API_URL + "api/login/check",
-		method:"post",
-		dataType: "json",
-		data: {password : passwordSend},
-		success: function (data) {
-					if(data.status === "OK"){
-						$("#loginForm").hide();
-						$("#mainForm").show();
-					}
-		}
-	});
-}
-function logout(){
-	let choose = confirm("You are sure?");
-	if(choose){
-		$(".inputPass").val("");
-		$.ajax({
-			url: API_URL + "api/login/logout",
-			method: "post",
-			success: function (){
-				$("#loginForm").show();
-				$("#mainForm").hide();
-			}
-		});
-	}
 }
 function sendCommandToUserPC(comm) {
 	if(statusGlobal === "active"){

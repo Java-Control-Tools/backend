@@ -55,11 +55,15 @@ public class JavaControlService {
         checkActiveUsers();
         return userPCRepository.findAll(); // Поиск всех ПК в БД и отправка в формате листа на view
     }
+
+    public boolean checkUserDB(String ipAddress, String port){
+        return userPCRepository.existsByIpAddressAndPort(ipAddress, port);
+    }
     /**
      * Добавление ПК пользователя, предварительно проверив есть ли уже такой ПК в таблице
      * */
     public ResponseEntity<StatusDTO> addUser(String ipAddress, String port){
-        if(!userPCRepository.existsByIpAddressAndPort(ipAddress, port)){ // Проверка на то, нет ли такой же записи в бд
+        if(!checkUserDB(ipAddress, port)){ // Проверка на то, нет ли такой же записи в бд
             try{
                 UserPC user = new UserPC();
                 user.setIpAddress(ipAddress);
@@ -78,7 +82,7 @@ public class JavaControlService {
      * Метод для удаления ПК пользователя
      */
     public ResponseEntity<StatusDTO> deleteUser(String ipAddress, String port){
-        if(userPCRepository.existsByIpAddressAndPort(ipAddress, port)){ // Проверка на то есть ли такая запись вообще
+        if(checkUserDB(ipAddress,port)){ // Проверка на то есть ли такая запись вообще
             UserPC user = userPCRepository.findByIpAddressAndPort(ipAddress, port);
             userPCRepository.delete(user);
             return ResponseEntity.ok().body(new StatusDTO(StatusCode.OK));
@@ -89,7 +93,7 @@ public class JavaControlService {
      * Метод для обновления ПК пользователя
      */
     public ResponseEntity<StatusDTO> updateUser(String oldIpAddress, String oldPort, String newIpAddress, String newPort){
-        if(userPCRepository.existsByIpAddressAndPort(oldIpAddress, oldPort) && !userPCRepository.existsByIpAddressAndPort(newIpAddress, newPort)){
+        if(checkUserDB(oldIpAddress, oldPort) && !checkUserDB(newIpAddress, newPort)){
             // Тут проверка на то есть ли запись по старым данным и одновременно проверка нет ли такой же записи по новым данным
             // Сделано, для того чтобы избежать повторения записей
             UserPC user = userPCRepository.findByIpAddressAndPort(oldIpAddress, oldPort);

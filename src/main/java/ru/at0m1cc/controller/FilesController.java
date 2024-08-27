@@ -20,13 +20,10 @@ public class FilesController {
 
     @GetMapping("/photo")
     public ResponseEntity<?> getPhoto(HttpSession session) {
-        if(session.getAttribute("login") != null) {
-            try {
-                return ResponseEntity.ok().body(Files.readAllBytes(Path.of("screen.png")));
-            } catch (IOException e) {
-                return ResponseEntity.notFound().build();
-            }
+        try {
+            return ResponseEntity.ok().body(Files.readAllBytes(Path.of("screen.png")));
+        } catch (IOException e) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
     }
 }

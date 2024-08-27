@@ -1,5 +1,10 @@
 package ru.at0m1cc.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class StatusDTO {
     private String status;
     public StatusDTO(StatusCode status) {
@@ -16,10 +21,5 @@ public class StatusDTO {
         }
 
     }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
+
 }

@@ -35,58 +35,43 @@ public class JavaControlController {
      * */
     @GetMapping("/showUsersPC")
     @CrossOrigin("*")
-    public List<UserPC> showUsers(HttpSession session) {
-        if(session.getAttribute("login") != null) {
-            return javaControlService.showUsers();
-        }
-        return null;
+    public List<UserPC> showUsers() {
+        return javaControlService.showUsers();
     }
     /**
      * API для обработки команд
      * */
     @PostMapping("/controlUserPC")
     @CrossOrigin("*")
-    public ResponseEntity<StatusDTO> control(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port, @RequestParam("command") String command) {
-        if(session.getAttribute("login") != null) {
-            return  javaControlService.sendCommandToUserPC(ipAddress, port, command);
-        }
-        return ResponseEntity.status(401).build();
+    public ResponseEntity<StatusDTO> control(@RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port, @RequestParam("command") String command) {
+        return  javaControlService.sendCommandToUserPC(ipAddress, port, command);
     }
     /**
      * API для добавления ПК пользователя в бд
      */
     @PostMapping("/addUserPC")
     @CrossOrigin("*")
-    public ResponseEntity<StatusDTO> addUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
+    public ResponseEntity<StatusDTO> addUser(@RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
         if(port.isEmpty()){ //Если порт пустой, то ставим по дефолту
             port = "5556";
         }
-        if(session.getAttribute("login") != null) {
-           return javaControlService.addUser(ipAddress, port);
-        }
-        return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
+        return javaControlService.addUser(ipAddress, port);
     }
     /**
      * API для удаления ПК пользователя из бд
      */
     @PostMapping("/deleteUserPC")
     @CrossOrigin("*")
-    public ResponseEntity<StatusDTO> deleteUser(HttpSession session, @RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
-        if(session.getAttribute("login") != null) {
-            return javaControlService.deleteUser(ipAddress, port);
-        }
-        return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
+    public ResponseEntity<StatusDTO> deleteUser(@RequestParam("ipAddress") String ipAddress, @RequestParam("port") String port){
+        return javaControlService.deleteUser(ipAddress, port);
     }
     /**
      * API для обновления ПК пользователя в бд
      */
     @PostMapping("/updateUserPC")
     @CrossOrigin("*")
-    public ResponseEntity<StatusDTO> updateUser(HttpSession session, @RequestParam("oldIp") String oldIpAddress, @RequestParam("oldPort") String oldPort,
+    public ResponseEntity<StatusDTO> updateUser(@RequestParam("oldIp") String oldIpAddress, @RequestParam("oldPort") String oldPort,
                                                 @RequestParam("newIp") String newIpAddress, @RequestParam("newPort") String newPort){
-        if(session.getAttribute("login") != null) {
-            return javaControlService.updateUser(oldIpAddress, oldPort, newIpAddress, newPort);
-        }
-        return ResponseEntity.status(401).body(new StatusDTO(StatusCode.ERROR));
+        return javaControlService.updateUser(oldIpAddress, oldPort, newIpAddress, newPort);
     }
 }

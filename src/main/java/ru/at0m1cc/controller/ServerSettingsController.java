@@ -32,11 +32,9 @@ public class ServerSettingsController {
      * */
     @PostMapping("/reboot")
     @CrossOrigin("*")
-    public void reboot(HttpSession session, @RequestHeader(value = "User-Agent") String userAgent) {
-        if (session.getAttribute("login") != null) {
-            logger.writeRebootServerLog(userAgent);
-            serverSettingsService.reboot();
-        }
+    public void reboot(@RequestHeader(value = "User-Agent") String userAgent) {
+        logger.writeRebootServerLog(userAgent);
+        serverSettingsService.reboot();
     }
     /**
      * API для вывода логов
@@ -44,9 +42,6 @@ public class ServerSettingsController {
     @GetMapping("/showLogs")
     @CrossOrigin("*")
     public List<String> showLogs(HttpSession session) throws IOException {
-        if (session.getAttribute("login") != null) {
-            return serverSettingsService.showLogs();
-        }
-        return null;
+        return serverSettingsService.showLogs();
     }
 }
