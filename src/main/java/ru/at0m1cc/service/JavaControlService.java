@@ -51,7 +51,7 @@ public class JavaControlService {
     /**
      * Вывод всех ПК пользователей, предварительно проверив их статус активности
      * */
-    public List<UserPC> showUsers(){
+    public List<UserPC> getUsersPC(){
         checkActiveUsers();
         return userPCRepository.findAll(); // Поиск всех ПК в БД и отправка в формате листа на view
     }

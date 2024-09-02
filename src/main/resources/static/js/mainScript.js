@@ -99,6 +99,7 @@ function showLogs(){ //Вывод логов
 	$(".headerP").text("Logs");
 	$("#jcShow").hide();
 	$("#controlShow").hide();
+	$("#usersShow").hide();
 	$("#settingsShow").hide();
 	$.ajax({
 		url: API_URL + "api/server/showLogs",
@@ -109,4 +110,7 @@ function showLogs(){ //Вывод логов
 			})
 		}
 	});
+}
+function logout(){
+	window.location = "/logout";
 }

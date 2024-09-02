@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/jquery.bpopup.js"></script>
 	<script type="text/javascript" src="js/mainScript.js"></script>
 	<script type="text/javascript" src="js/showingContentBlocks.js"></script>
+	<script type="text/javascript" src="js/crudOperationsForUsersPC.js"></script>
 	<script type="text/javascript" src="js/crudOperationsForUsers.js"></script>
 </head>
 <body>
@@ -21,7 +22,9 @@
 		</header>
 		<div class = "contentDiv"><!--Дивчик с контентом страницы-->
 			<div class="leftDiv"><!--Дивчик с кнопками навигации-->
-				<button class="mainButton" onclick="jcShow()">View all PCs with Java control(JC)</button>
+				<button class="mainButton" onclick="jcShow()">View all PCs with Java control</button>
+				<br/>
+				<button class="mainButton" onclick="usersShow()">View all accounts</button>
 				<br/>
 				<button class="mainButton" onclick="settingsShow()">Settings</button>
 				<br/>
@@ -30,6 +33,22 @@
 				<button id="updateScreen" class="mainButton" onclick="sendCommandToUserPC('screen')">Update screenshot</button>
 			</div>
 			<div class="rightDiv"><!--Дивчик с контентом-->
+				<div id="usersShow">
+					<div class="JCDiv">
+						<table id="accountsTable">
+							<thead>
+							<tr>
+								<th>ID</th>
+								<th>Username</th>
+								<th>Role</th>
+								<th>Settings</th>
+							</tr>
+							</thead>
+							<tbody id="accountsBody">
+							</tbody>
+						</table>
+					</div>
+				</div>
 				<div id="jcShow"><!--Дивчик с таблицей ПК-->
 					<div class="JCDiv">
 						<table id = "tableUsers">

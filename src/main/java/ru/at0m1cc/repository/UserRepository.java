@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.at0m1cc.db.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,5 +19,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * Поиск аргумента Password по столбцу Password
      * */
     Optional<User> findByUsername(String username);
-    Optional<User> findByUsernameAndPassword(String username, String password);
 }

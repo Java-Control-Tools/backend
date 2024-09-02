@@ -1,11 +1,9 @@
 package ru.at0m1cc.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.at0m1cc.db.UserPC;
-import ru.at0m1cc.dto.StatusCode;
 import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.service.JavaControlService;
 
@@ -36,7 +34,7 @@ public class JavaControlController {
     @GetMapping("/showUsersPC")
     @CrossOrigin("*")
     public List<UserPC> showUsers() {
-        return javaControlService.showUsers();
+        return javaControlService.getUsersPC();
     }
     /**
      * API для обработки команд

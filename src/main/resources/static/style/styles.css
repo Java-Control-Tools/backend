@@ -116,6 +116,9 @@ input:focus{
   border-color: #5890c4;
   color: #fff;
 }
+#usersShow{
+  display: none;
+}
 #mainForm{
   display: block;
 }

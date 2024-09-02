@@ -11,6 +11,7 @@ import ru.at0m1cc.dto.StatusCode;
 import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,6 +36,9 @@ public class UserService implements org.springframework.security.core.userdetail
             return new StatusDTO(StatusCode.OK);
         }
         return new StatusDTO(StatusCode.ERROR);
+    }
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //Выгурзить инфу о юзере в опшионал
