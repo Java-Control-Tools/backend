@@ -6,6 +6,7 @@ function jcShow() {
     $("#logShow").hide();
     $("#updateScreen").hide();
     $("#usersShow").hide();
+    $('#updateUserDiv').hide();
     showUsers();
 }
 function settingsShow(){
@@ -16,6 +17,7 @@ function settingsShow(){
     $("#updateScreen").hide();
     $("#usersShow").hide();
     $("#logShow").hide();
+    $('#updateUserDiv').hide();
 }
 function controlShow(ipAddress, port, status){ //Заход на пользователя
     ipGlobal = ipAddress;
@@ -30,6 +32,7 @@ function controlShow(ipAddress, port, status){ //Заход на пользов�
     $("#settingsShow").hide();
     $("#logShow").hide();
     $("#updateScreen").hide();
+    $('#updateUserDiv').hide();
 }
 function usersShow(){
     $(".headerP").text("Accounts settings");
@@ -39,5 +42,16 @@ function usersShow(){
     $("#updateScreen").hide();
     $("#usersShow").show();
     $("#logShow").hide();
+    $('#updateUserDiv').hide();
     readUsers();
+}
+function userUpdateDivShow(username){
+    $(".headerP").text(username);
+    $("#jcShow").hide();
+    $("#controlShow").hide();
+    $("#settingsShow").hide();
+    $("#updateScreen").hide();
+    $("#usersShow").hide();
+    $("#logShow").hide();
+    $('#updateUserDiv').show();
 }

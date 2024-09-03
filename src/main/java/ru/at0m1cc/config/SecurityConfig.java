@@ -25,7 +25,12 @@ public class SecurityConfig {
                         .permitAll())
                 .formLogin(settings -> settings.loginPage("/login").permitAll())
                 .authorizeHttpRequests(settings -> settings
-                        .requestMatchers("/api/**").hasAuthority("root")
+                        .requestMatchers("/api/showUsers").hasAnyAuthority("root", "admin")
+                        .requestMatchers("/api/jc/**").hasAnyAuthority("root","admin")
+                        .requestMatchers("/api/jc/showUsersPC").authenticated()
+                        .requestMatchers("/api/server/**").hasAnyAuthority("root","admin")
+                        .requestMatchers("/files/**").authenticated()
+                        .requestMatchers("/").authenticated()
                         .requestMatchers("/style/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/").authenticated()

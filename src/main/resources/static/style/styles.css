@@ -68,6 +68,10 @@ p{
 .rightDiv{
   flex-basis: 100%;
 }
+#smallSettingsButton{
+  width: 80px;
+  height: 30px;
+}
 .JCDiv {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -115,6 +119,9 @@ input:focus{
   background: #5890c4;
   border-color: #5890c4;
   color: #fff;
+}
+#updateUserDiv{
+  display: none;
 }
 #usersShow{
   display: none;
