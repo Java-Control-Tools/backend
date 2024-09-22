@@ -55,3 +55,6 @@ function userUpdateDivShow(username){
     $("#logShow").hide();
     $('#updateUserDiv').show();
 }
+function showAddUserModal(){
+    $("#addUserModal").bPopup();
+}

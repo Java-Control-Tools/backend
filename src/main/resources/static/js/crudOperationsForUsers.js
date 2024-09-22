@@ -1,3 +1,8 @@
+$(function (){
+	$("#formAddUser").submit(function(e){
+		e.preventDefault();
+	});
+});
 function readUsers(){
     $("#accountsBody").empty();
     $.ajax({

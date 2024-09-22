@@ -42,6 +42,7 @@
 						<p><button class="settingsButton">Reset password</button></p>
 					</div>
 				</div>
+				<!--Дивчик с показом пользователей-->
 				<div id="usersShow">
 					<div class="JCDiv">
 						<table id="accountsTable">
@@ -56,6 +57,17 @@
 							<tbody id="accountsBody">
 							</tbody>
 						</table>
+					</div>
+					<button class="mainButton" style="background: #2f3595;margin: 10px;" onclick="showAddUserModal()">Add user</button>
+					<div id="addUserModal">
+						<form id="formAddUser" method="post">
+							<p><input type="text" name="username" placeholder="Username" style="margin-left: 15px;margin-right: 15px;margin-bottom: 5px;" required></p>
+							<p><input type="password" name="password" placeholder="Password" style="margin-left: 15px;margin-right: 15px;margin-bottom: 5px;" required></p>
+							<p><input type="password" name="confirmPassword" placeholder="Confirm password" style="margin-left: 15px;margin-right: 15px;margin-bottom: 10px;" required></p>
+							<p><input type="radio" name="role" value="admin">Admin</p>
+							<p><input type="radio" name="role" value="user">User</p>
+							<button class="mainButton" id="scanButton" style="margin-bottom: 10px;">Add</button>
+						</form>
 					</div>
 				</div>
 				<div id="jcShow"><!--Дивчик с таблицей ПК-->
