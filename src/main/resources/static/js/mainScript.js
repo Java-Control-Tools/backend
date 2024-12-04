@@ -1,7 +1,7 @@
 let ipGlobal;
 let portGlobal;
 let statusGlobal;
-const API_URL = "http://localhost:8080/";
+const API_URL = "http://10.4.3.180:8080/";
 
 $(function (){
 	$("#changePassDiv").submit(function(e){

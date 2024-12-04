@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.at0m1cc.dto.StatusCode;
 import ru.at0m1cc.dto.StatusDTO;
 import ru.at0m1cc.log.Logger;
 import ru.at0m1cc.service.UserService;

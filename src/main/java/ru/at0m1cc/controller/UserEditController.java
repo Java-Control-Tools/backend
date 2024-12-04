@@ -13,8 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class UserEditController {
-    private final UserService userService;
     @Autowired
+    private final UserService userService;
+   
     public UserEditController(UserService userService) {
         this.userService = userService;
     }
